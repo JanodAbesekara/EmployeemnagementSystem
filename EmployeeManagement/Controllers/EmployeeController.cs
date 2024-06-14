@@ -54,7 +54,7 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<Employee>> Login(EmployeeDTO request)
+        public async Task<ActionResult<Employee>> Login(EmloyLoginDTO request)
         {
             // Find the user by email
             var employee = await _context.Employee.FirstOrDefaultAsync(u => u.Email == request.Email);
@@ -72,10 +72,12 @@ namespace EmployeeManagement.Controllers
             }
 
             // Generate JWT token
-            string token = GenerateJwtToken(employee);
+           string token = GenerateJwtToken(employee);
 
 
-            return Ok("Token"+ token);
+             return Ok(token);
+
+           
         }
         
         private string GenerateJwtToken(Employee employee)
